@@ -1,0 +1,12 @@
+javascript:(function($){
+   $.fn.showIids=function() {
+      var pageType=digitalData.page.category.pageType;
+      var descriptionCode=digitalData.page.attributes.descriptonCode;
+      return this.each(function(i,el){
+         var a = el;
+         var offerType=(a.attributes['data-offertype'].value);
+         var componet = (a.attributes['data-component'].value);
+         a.innerHTML = pageType+"_"+offerType+"_"+descriptionCode+"_"+componet;
+        });
+      };
+      })(jQuery);jQuery('a[data-link="lead"]').showIids().css("color","blue");
