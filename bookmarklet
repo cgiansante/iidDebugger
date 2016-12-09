@@ -1,12 +1,35 @@
-javascript:(function($){
-   $.fn.showIids=function() {
-      var pageType=digitalData.page.category.pageType;
-      var descriptionCode=digitalData.page.attributes.descriptonCode;
-      return this.each(function(i,el){
-         var a = el;
-         var offerType=(a.attributes['data-offertype'].value);
-         var componet = (a.attributes['data-component'].value);
-         a.innerHTML = pageType+"_"+offerType+"_"+descriptionCode+"_"+componet;
-        });
-      };
-      })(jQuery);jQuery('a[data-link="lead"]').showIids().css("color","blue");
+javascript: (function($) {
+  $.fn.showIids = function() {
+    var pageType = digitalData.page.category.pageType;
+    var descriptionCode = digitalData.page.attributes.descriptonCode;
+    return this.each(function(i, el) {
+      var a = el;
+      var b = el.href;
+      var offerType = a.attributes['data-offertype'].value;
+      var componet = a.attributes['data-component'].value;
+      if (b.indexOf("/videos/") != -1) {
+        b = "vid";
+      } else if (b.indexOf("/company/events/conferences") != -1) {
+        b = "conf";
+      } else if (b.indexOf("/academia/courseware/") != -1) {
+        b = "cw";
+      } else if (b.indexOf("-sem-") != -1) {
+        b = "sem";
+      } else if (b.indexOf("-lwb-") != -1) {
+        b = "lwb";
+      } else if (b.indexOf("/campaigns/") != -1 && b.indexOf("/offer/") != -1) {
+        b = "cmpofr";
+      } else if (b.indexOf("/campaigns/") != -1 && b.indexOf("/display/") != -1) {
+        b = "cmpdsp";
+      } else if (b.indexOf("/campaigns/") != -1 && b.indexOf("/ppc/") != -1) {
+        b = "cmpppc";
+      } else {
+        b = offerType.replace(/\s/g, "");
+      }
+      a.innerHTML = pageType + "_" + b + "_" + descriptionCode + "_" + componet;
+    });
+  };
+})(jQuery);
+
+$('a[data-link="lead"]').showIids().css("color", "red");
+
